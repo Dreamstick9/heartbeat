@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Heartbeat</title>
+  <meta name="description" content="Daily tasks, PR tracking and a leaderboard for the Kreg Lite team.">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='9' fill='%2316a34a'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="styles.css?v=4">
+</head>
+<body>
+  <header class="wrap top">
+    <div>
+      <h1>Heartbeat</h1>
+      <p class="muted">Kreg Lite team tracker</p>
+    </div>
+    <div class="today">
+      <div id="today-date"></div>
+      <div class="muted"><span id="today-day"></span> · <span id="sync"></span></div>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <div id="banner"></div>
+
+    <section aria-labelledby="days-h">
+      <div class="head"><h2 id="days-h">Days</h2><div id="overall" class="muted small"></div></div>
+      <div id="days" class="days" role="tablist" aria-label="Plan days"></div>
+    </section>
+
+    <section aria-labelledby="work-h">
+      <div class="head">
+        <h2 id="work-h">Today</h2>
+        <div class="nav">
+          <button id="prev-day" type="button" aria-label="Previous day">←</button>
+          <button id="to-today" type="button">Today</button>
+          <button id="next-day" type="button" aria-label="Next day">→</button>
+        </div>
+      </div>
+      <div id="members" class="members"></div>
+    </section>
+
+    <div class="split">
+      <section aria-labelledby="board-h">
+        <div class="head"><h2 id="board-h">Leaderboard</h2><button id="refresh" type="button">Refresh</button></div>
+        <ol id="board" class="board"></ol>
+        <p class="muted small">Score = 10 × points of tasks merged + 5 × PRs merged + 2 × PRs open + 1 × commit + 3 × active day. Active days stand in for time spent.</p>
+      </section>
+
+      <section aria-labelledby="feed-h">
+        <div class="head"><h2 id="feed-h">Pull requests</h2></div>
+        <ul id="feed" class="feed"></ul>
+      </section>
+    </div>
+
+    <section aria-labelledby="plan-h">
+      <div class="head"><h2 id="plan-h">Full plan</h2><span class="muted small">20 points each, at most 3 a day</span></div>
+      <div class="table-wrap"><table id="plan" class="plan"></table></div>
+    </section>
+
+    <section>
+      <h2>How it works</h2>
+      <p>Put the task ID in your PR title, like <code>KL-07: register route</code>. An open PR marks it in review; a merged PR marks it done.</p>
+      <p>Tasks with nothing to merge, like testing, notes or rehearsal, have a <b>Mark done</b> button. Marks are saved in this browser only, so each person ticks their own.</p>
+    </section>
+  </main>
+
+  <script type="module" src="app.js?v=4"></script>
+</body>
+</html>
