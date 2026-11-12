@@ -9,8 +9,8 @@ export default {
   // The four of you, in plan order: member 0 gets the "A" tasks in plan.js, member 1 "B", and so on.
   // `github` is the login only (no @). `name` is what the page shows.
   team: [
-    { name: "Kabir", github: "kabirvashisht4-glitch" },
     { name: "Dreamstick", github: "dreamstick9" },
+    { name: "Kabir", github: "kabirvashisht4-glitch" },
     { name: "Madhav", github: "Madhav-GPT" },
     { name: "Boomelio", github: "boomelio" },
   ],
