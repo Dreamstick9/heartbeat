@@ -15,6 +15,9 @@ export default {
     { name: "Boomelio", github: "boomelio" },
   ],
 
+  // The leaderboard only counts PRs and commits made after this moment (UTC). Move it to reset the scores.
+  countFrom: "2026-11-13T14:00:00Z",
+
   // How long each browser reuses its saved copy of GitHub data (GitHub allows 60 requests an hour without a token).
   cacheMinutes: 10,
 };

@@ -53,6 +53,7 @@ Commits are counted on the default branch, so they show up once a PR is merged.
 ## Change things
 
 - Start date, repo or names: `config.js`.
+- Reset the leaderboard: set `countFrom` in `config.js` to the current UTC time. Activity before it is ignored.
 - Tasks: `plan.js`. Each has `day`, `who` (0 to 3), `pts` (1 to 3), a one-line `goal`, numbered `steps`,
   `done` checks, the `pr` title (or `null` for tasks with nothing to merge) and `deps`.
   The last step (open the PR, or Mark done) is added automatically.

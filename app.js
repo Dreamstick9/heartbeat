@@ -1,8 +1,8 @@
 // Heartbeat: reads the browser's date, shows each person's tasks for the day, and tracks
 // PRs and commits straight from GitHub. Everything it keeps (GitHub data, tasks marked done)
 // lives in this browser's localStorage. Nothing here writes to GitHub.
-import cfg from "./config.js?v=8";
-import PLAN, { GUIDE } from "./plan.js?v=8";
+import cfg from "./config.js?v=9";
+import PLAN, { GUIDE } from "./plan.js?v=9";
 
 (function () {
   "use strict";
@@ -167,8 +167,9 @@ import PLAN, { GUIDE } from "./plan.js?v=8";
 
   // ---------- derived state ----------
   function derive() {
-    // Only PRs opened from two days before day 1 count, for tasks and for the leaderboard alike.
-    const windowStart = new Date(START.getTime() - 2 * DAY_MS);
+    // Only activity after countFrom (or, without it, from two days before day 1) counts,
+    // for tasks and for the leaderboard alike.
+    const windowStart = cfg.countFrom ? new Date(cfg.countFrom) : new Date(START.getTime() - 2 * DAY_MS);
     const pulls = gh.pulls.filter((pr) => new Date(pr.createdAt) >= windowStart);
     const status = new Map(); // task id -> { s: "done" | "review", pr }
     for (const pr of pulls) {
@@ -192,7 +193,11 @@ import PLAN, { GUIDE } from "./plan.js?v=8";
       if (pr.merged) s.merged++; else if (pr.state === "open") s.open++;
       s.days.add(ymd(new Date(pr.createdAt)));
     }
-    for (const c of gh.commits) { const s = statOf(c.login); if (s) { s.commits++; s.days.add(ymd(new Date(c.date))); } }
+    for (const c of gh.commits) {
+      if (new Date(c.date) < windowStart) continue;
+      const s = statOf(c.login);
+      if (s) { s.commits++; s.days.add(ymd(new Date(c.date))); }
+    }
     for (const [id, st] of status) {
       const t = planById.get(id);
       if (!t || st.s !== "done") continue;
