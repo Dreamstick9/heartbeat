@@ -48,16 +48,16 @@ const L = {
 // Rules every task follows. Shown on the page as the Team guide.
 export const GUIDE = {
   setup: [
-    "Repo: `https://github.com/Dreamstick9/Kreg_AP_2026`. Everyone works in this one repo as a collaborator. No forks.",
+    "Repo: `https://github.com/Dreamstick9/Kreg_AP_2026`. Everyone forks it, works on their own fork, and sends pull requests back to it. (The repo owner works in the repo directly and skips the fork and `upstream` steps.)",
     "Install Node.js 18 or newer and PostgreSQL 16. Create the database once: `createdb kreg`.",
-    "First time: `git clone https://github.com/Dreamstick9/Kreg_AP_2026.git`, `cd Kreg_AP_2026`, `cp .env.example .env`, put your own Postgres user and password into `DATABASE_URL` in `.env`, then `npm install`.",
-    "Every time before you start a task: `git checkout main`, `git pull`, `npm install`, and (once Prisma exists) `npx prisma migrate dev`.",
+    "First time: on the repo's GitHub page press Fork. Then `git clone https://github.com/<your-username>/Kreg_AP_2026.git`, `cd Kreg_AP_2026`, `git remote add upstream https://github.com/Dreamstick9/Kreg_AP_2026.git`, `cp .env.example .env`, put your own Postgres user and password into `DATABASE_URL` in `.env`, then `npm install`.",
+    "Every time before you start a task, get everyone's merged work: `git checkout main`, `git pull upstream main`, `git push origin main`, `npm install`, and (once Prisma exists) `npx prisma migrate dev`. Then make your task branch from this `main`.",
   ],
   workflow: [
-    "One branch per task. Each task card shows its branch name, like `kl-07-register-route`.",
-    "Open a pull request into `main` with the exact title shown on the card, like `KL-07: register route`. Heartbeat marks the task done when that PR is merged.",
-    "Ask one teammate to review: they pull your branch, run it, tick the Done when list, and approve. Then you merge with Squash and merge.",
-    "Never push straight to `main`. Never commit `.env` or `node_modules`.",
+    "One branch per task, made from an up-to-date `main`. Each task card shows its branch name, like `kl-07-register-route`: `git checkout -b kl-07-register-route`.",
+    "Push the branch to your fork (`git push origin kl-07-register-route`). On GitHub, open a pull request from that branch into `Dreamstick9/Kreg_AP_2026` `main`, with the exact title shown on the card, like `KL-07: register route`. Heartbeat marks the task done when that PR is merged.",
+    "Ask one teammate to review: they check it out with `gh pr checkout <PR number>` (or the commands GitHub shows on the PR), run it, tick the Done when list, and approve. Then the repo owner merges it with Squash and merge.",
+    "Never commit to your fork's `main`; it only mirrors `upstream`. Never commit `.env` or `node_modules`.",
     "Changing `prisma/schema.prisma` affects everyone: say so in the group chat before you open that PR.",
     "Stuck for more than 30 minutes? Post in the group chat what you tried and the exact error.",
   ],
@@ -96,7 +96,7 @@ const PLAN = [
   { id: "KL-01", day: 1, who: 0, pts: 2, title: "Set up the repo and the Express skeleton",
     goal: "Give everyone a project they can clone and run, so every other task has a place to go.",
     steps: [
-      "On GitHub open `Dreamstick9/Kreg_AP_2026` → Settings → Collaborators → Add people, and invite the other three by GitHub username. Tell them to accept the email invite.",
+      "You own the repo, so clone `Dreamstick9/Kreg_AP_2026` directly (no fork) and make the branch there.",
       "`npm init -y`, then `npm install express@4 dotenv cors morgan` and `npm install -D nodemon`.",
       "In `package.json` set `\"main\": \"src/server.js\"` and the scripts `\"dev\": \"nodemon src/server.js\"` and `\"start\": \"node src/server.js\"`.",
       "Create `src/app.js`: create the Express app, add `cors()`, `express.json()` and `morgan('dev')`, mount the health router at `/healthz`, and `module.exports = app`. Do not call `listen` in this file.",
@@ -111,7 +111,7 @@ const PLAN = [
       "On a fresh clone, `cp .env.example .env`, `npm install` and `npm run dev` start the server with no errors.",
       "`curl localhost:3000/healthz` prints `{\"ok\":true}`.",
       "`git status` after running shows no `node_modules` and no `.env`.",
-      "All three teammates have accepted the collaborator invite.",
+      "The other three have forked the repo and added `upstream` (Team guide → Setup), so they can start their day 1 tasks.",
     ],
     pr: "KL-01: express skeleton",
     concepts: "Express app vs server, MVC folder structure, environment variables with dotenv, .gitignore",
@@ -120,7 +120,7 @@ const PLAN = [
   { id: "KL-02", day: 1, who: 1, pts: 2, title: "Add Prisma, the shared client and the database schema",
     goal: "Create the four tables that everyone else's code reads and writes.",
     steps: [
-      "Wait until KL-01 is merged (it's planned for the morning), then `git checkout main` and `git pull`.",
+      "Wait until KL-01 is merged (it's planned for the morning), then `git checkout main`, `git pull upstream main` and `git push origin main`.",
       "`npm install -D prisma@6` and `npm install @prisma/client@6`, then `npx prisma init`. Put your real Postgres login into `DATABASE_URL` in `.env` (not `.env.example`).",
       "In `prisma/schema.prisma` add `enum MonitorStatus { UP DOWN UNKNOWN }` and the four models below. Every field with a two-word name gets `@map(\"snake_case\")`, and every model gets `@@map(\"table_name\")`.",
       "`User` → `@@map(\"users\")`: `id Int @id @default(autoincrement())`, `name String`, `email String @unique`, `passwordHash String @map(\"password_hash\")`, `createdAt DateTime @default(now()) @map(\"created_at\")`, `monitors Monitor[]`.",
@@ -160,7 +160,7 @@ const PLAN = [
   { id: "KL-04", day: 1, who: 2, pts: 1, title: "Build the fake target server",
     goal: "A website you can switch between up and down, for testing and for the demo.",
     steps: [
-      "After KL-01 is merged, `git pull`.",
+      "After KL-01 is merged: `git checkout main`, `git pull upstream main`, `git push origin main`.",
       "Create `tools/fake-target.js`: a separate Express app that listens on port 4000 and has `let healthy = true` at the top.",
       "`GET /ok` → status 200, body `ok`.",
       "`GET /slow` → wait 3000 ms with `setTimeout`, then 200, body `slow`.",
@@ -475,7 +475,7 @@ const PLAN = [
   { id: "KL-21", day: 5, who: 3, pts: 2, title: "Merge day: test the whole flow end to end",
     goal: "Find every bug in days 1 to 5 while there's still time to fix them.",
     steps: [
-      "Once everyone's day 1 to 5 PRs are merged: `git pull`, `npm install`, `npx prisma migrate reset` (this also runs the seed).",
+      "Once everyone's day 1 to 5 PRs are merged: `git checkout main`, `git pull upstream main`, `npm install`, `npx prisma migrate reset` (this also runs the seed).",
       "Start `npm run fake` in one terminal and `npm run dev` in another.",
       "In Postman, in this order: Register a new user → Login → Create monitor with url `http://localhost:4000/flaky` and `intervalSec: 10` → wait 30 s → Get results (rows appear) → `POST localhost:4000/toggle` → wait 40 s → Get monitor (`status` DOWN, `openIncident` set) → Get stats.",
       "For each step that fails or looks wrong, open a GitHub issue in the repo with the label `bug`: what you did, what you expected, what happened, and which task ID it belongs to.",
@@ -610,7 +610,7 @@ const PLAN = [
     goal: "Anyone can get the project running from the README alone.",
     steps: [
       "Rewrite `README.md` with these sections, in order: What it is (2 sentences), Requirements (Node 18+, PostgreSQL 16), Setup, Run, Demo login, Team.",
-      "Setup, as commands in this order: `git clone`, `cd`, `cp .env.example .env`, edit `DATABASE_URL`, `npm install`, `npx prisma migrate dev`, `npx prisma db seed`.",
+      "Setup, as commands in this order: Fork on GitHub, `git clone` your fork, `cd`, `git remote add upstream ...`, `cp .env.example .env`, edit `DATABASE_URL`, `npm install`, `npx prisma migrate dev`, `npx prisma db seed`.",
       "Run: `npm run fake`, `npm run dev`, and `cd client && npm install && npm run dev`, each in its own terminal.",
       "Demo login: `demo@kreg.dev` / `demo1234`. Team: the four names and a link to the Heartbeat page.",
       "Every command goes in a code block.",
@@ -710,7 +710,7 @@ const PLAN = [
     goal: "Confirm everything works on a fresh database, and be ready to explain auth.",
     steps: [
       "From today only bug fixes get merged. No new features.",
-      "`git pull`, `npm install`, `npx prisma migrate reset` (re-seeds), then start the fake target, the API and the client.",
+      "`git checkout main`, `git pull upstream main`, `npm install`, `npx prisma migrate reset` (re-seeds), then start the fake target, the API and the client.",
       "Run the Postman flow from KL-21 once, then the same flow in the React app. Post anything that breaks in the group chat.",
       "Write `docs/viva-auth.md`, at most one page, answering: How does register store the password? What's inside the JWT, and how long does it last? What does the auth middleware do, step by step? Why do other users' monitors return 404 and not 403?",
     ],

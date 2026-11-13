@@ -1,8 +1,8 @@
 // Heartbeat: reads the browser's date, shows each person's tasks for the day, and tracks
 // PRs and commits straight from GitHub. Everything it keeps (GitHub data, tasks marked done)
 // lives in this browser's localStorage. Nothing here writes to GitHub.
-import cfg from "./config.js?v=6";
-import PLAN, { GUIDE } from "./plan.js?v=6";
+import cfg from "./config.js?v=8";
+import PLAN, { GUIDE } from "./plan.js?v=8";
 
 (function () {
   "use strict";
@@ -209,9 +209,13 @@ import PLAN, { GUIDE } from "./plan.js?v=6";
   const plain = (text) => String(text).replace(/`/g, "");
   const branchOf = (pr) => pr.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
   // The plan's steps plus the last step every task shares: open the PR, or mark it done.
-  const stepsOf = (t) => [...t.steps, t.pr
-    ? `Commit on the branch \`${branchOf(t.pr)}\`, push it, and open a pull request into \`main\` titled \`${t.pr}\`. Ask one teammate to review it, then merge.`
-    : "There's nothing to merge. When every check below is true, press Mark done on this card."];
+  // The repo owner pushes branches to the repo itself; everyone else pushes to their fork.
+  const repoOwner = cfg.repo.split("/")[0].toLowerCase();
+  const stepsOf = (t) => [...t.steps, !t.pr
+    ? "There's nothing to merge. When every check below is true, press Mark done on this card."
+    : team[t.who]?.login === repoOwner
+    ? `Commit on the branch \`${branchOf(t.pr)}\` and push it to \`${cfg.repo}\`. Open a pull request into \`main\` titled \`${t.pr}\`. Ask one teammate to review it, then merge it.`
+    : `Commit on the branch \`${branchOf(t.pr)}\` and push it to your fork. On GitHub, open a pull request into \`${cfg.repo}\` \`main\` titled \`${t.pr}\`. Ask one teammate to review it; the repo owner merges it.`];
 
   function prompt(t) {
     const time = ["about an hour", "one to two hours", "two to three hours"][t.pts - 1];
