@@ -1,8 +1,8 @@
 // Heartbeat: reads the browser's date, shows each person's tasks for the day, and tracks
 // PRs and commits straight from GitHub. Everything it keeps (GitHub data, tasks marked done)
 // lives in this browser's localStorage. Nothing here writes to GitHub.
-import cfg from "./config.js?v=5";
-import PLAN from "./plan.js?v=5";
+import cfg from "./config.js?v=6";
+import PLAN, { GUIDE } from "./plan.js?v=6";
 
 (function () {
   "use strict";
@@ -203,22 +203,35 @@ import PLAN from "./plan.js?v=5";
     return { status, stats };
   }
 
+  // ---------- task text ----------
+  // `backticks` in plan text become <code>.
+  const rich = (text) => String(text).split(/`([^`]+)`/).map((part, k) => (k % 2 ? el("code", { text: part }) : part));
+  const plain = (text) => String(text).replace(/`/g, "");
+  const branchOf = (pr) => pr.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
+  // The plan's steps plus the last step every task shares: open the PR, or mark it done.
+  const stepsOf = (t) => [...t.steps, t.pr
+    ? `Commit on the branch \`${branchOf(t.pr)}\`, push it, and open a pull request into \`main\` titled \`${t.pr}\`. Ask one teammate to review it, then merge.`
+    : "There's nothing to merge. When every check below is true, press Mark done on this card."];
+
   function prompt(t) {
     const time = ["about an hour", "one to two hours", "two to three hours"][t.pts - 1];
     const deps = t.deps.map((d) => { const x = PLAN.find((p) => p.id === d); return x ? `${d} (${x.title})` : d; });
     return [
-      `I'm a B.Tech CS student on a 4-person team building "Kreg Lite", an uptime monitor: Node.js + Express (MVC folders), Prisma ORM, PostgreSQL, JWT auth, and an optional React frontend. A scheduler checks each monitored URL every few seconds, saves every result, opens an incident after 3 failures in a row, and serves uptime stats with SQL.`,
+      `I'm a B.Tech CS student on a 4-person team building "Kreg Lite", an uptime monitor: Node.js + Express 4 (MVC folders), Prisma 6, PostgreSQL, JWT auth, and a React (Vite) frontend. A scheduler checks each monitored URL every few seconds, saves every result, opens an incident after 3 failures in a row, and serves uptime stats with SQL.`,
+      `Our conventions: ${GUIDE.conventions.map(plain).join(" ")}`,
       ``,
       `My task today (${t.id}): ${t.title}`,
-      `What I need to do: ${t.todo}`,
-      `It's done when: ${t.done}`,
+      `Goal: ${plain(t.goal)}`,
+      `Steps:`,
+      ...stepsOf(t).map((x, k) => `${k + 1}. ${plain(x)}`),
+      `It's done when:`,
+      ...t.done.map((x) => `- ${plain(x)}`),
       deps.length ? `It builds on work that's already merged: ${deps.join(", ")}.` : ``,
       ``,
       `Please:`,
       `1. Explain these concepts simply, with a tiny example for each: ${t.concepts}.`,
-      `2. Tell me which files I'll create or change in an Express MVC project (routes, controllers, services, prisma) and what goes in each.`,
-      `3. Give me a step-by-step plan I can finish in ${time}.`,
-      `4. List the 3 mistakes students make most often on this.`,
+      `2. Walk me through the steps above one at a time: what each one means and how I'd check it worked.`,
+      `3. Point out anything in the steps I'm likely to get wrong, and how to spot it. I have ${time}.`,
       `Don't write the whole solution for me. When you're done, ask me 3 short questions to check I understood.`,
     ].filter((l, i, a) => !(l === `` && a[i - 1] === ``)).join("\n");
   }
@@ -322,8 +335,9 @@ import PLAN from "./plan.js?v=5";
           el("div", { class: "task-top" }, el("span", { class: "tid", text: t.id }), statusEl, markBtn,
             el("span", { class: "pts", text: `${t.pts} pt${t.pts === 1 ? "" : "s"}` })),
           el("div", { class: "task-title", text: t.title }),
-          el("p", { class: "kv" }, el("b", { text: "Do" }), t.todo),
-          el("p", { class: "kv muted" }, el("b", { text: "Done when" }), t.done),
+          el("p", { class: "goal" }, rich(t.goal)),
+          el("div", { class: "block" }, el("b", { text: "Steps" }), el("ol", { class: "steps" }, stepsOf(t).map((x) => el("li", {}, rich(x))))),
+          el("div", { class: "block" }, el("b", { text: "Done when" }), el("ul", { class: "checks" }, t.done.map((x) => el("li", {}, rich(x))))),
           t.deps.length ? el("div", { class: "deps" }, "Needs", t.deps.map((d) => { const s = status.get(d); return el("span", { class: "dep " + (s ? s.s : ""), title: s ? (s.s === "done" ? "done" : "in review") : "not done yet", text: d }); })) : null,
           t.lectures.length ? el("div", { class: "lectures" }, el("b", { text: "Rewatch" }), t.lectures.map((l) => el("span", { text: l }))) : null,
           el("details", { class: "prompt" }, el("summary", {}, el("span", { text: "LLM prompt" }), copyBtn), el("pre", { text: pr }))));
@@ -379,6 +393,21 @@ import PLAN from "./plan.js?v=5";
     table.append(tb, el("tfoot", {}, el("tr", {}, el("td", { text: "Total" }), team.map((m) => el("td", { text: `${PLAN.filter((t) => t.who === m.i).reduce((a, t) => a + t.pts, 0)} pts` })))));
   }
 
+  // ---------- team guide ----------
+  function renderGuide() {
+    const list = (items) => el("ul", { class: "guide-list" }, items.map((x) => el("li", {}, rich(x))));
+    $("guide").replaceChildren(
+      el("details", { open: true }, el("summary", { text: "Setup" }), list(GUIDE.setup)),
+      el("details", {}, el("summary", { text: "How we work" }), list(GUIDE.workflow)),
+      el("details", {}, el("summary", { text: "Code conventions" }), list(GUIDE.conventions)),
+      el("details", {}, el("summary", { text: "API contract" }),
+        el("div", { class: "table-wrap" }, el("table", { class: "plan api" },
+          el("thead", {}, el("tr", {}, ["Method", "Path", "Token", "Task", "Returns"].map((h) => el("th", { text: h })))),
+          el("tbody", {}, GUIDE.api.map((r) => el("tr", {},
+            el("td", { class: "mono", text: r[0] }), el("td", { class: "mono", text: r[1] }), el("td", { text: r[2] }),
+            el("td", { class: "mono", text: r[3] }), el("td", {}, rich(r[4])))))))));
+  }
+
   // ---------- wiring ----------
   $("prev-day").addEventListener("click", () => { selDay = clampDay(selDay - 1); render(); });
   $("next-day").addEventListener("click", () => { selDay = clampDay(selDay + 1); render(); });
@@ -388,6 +417,7 @@ import PLAN from "./plan.js?v=5";
   // keep several open tabs in step when one of them marks a task
   window.addEventListener("storage", (e) => { if (e.key === MARKS_KEY) { gh.marks = loadMarks(); render(); } });
 
+  renderGuide();
   render();
   loadData(false);
 })();

@@ -127,3 +127,23 @@ section { display: flex; flex-direction: column; gap: 12px; min-width: 0; }
   .today { text-align: left; }
   .day { padding: 6px; }
 }
+
+/* task details */
+.task code, .guide code, .plan.api code { font-family: var(--mono); font-size: 0.85em; background: var(--soft); padding: 0 4px; border-radius: 4px; overflow-wrap: anywhere; }
+.goal { font-size: 0.9rem; color: var(--muted); }
+.block { display: flex; flex-direction: column; gap: 4px; font-size: 0.9rem; }
+.block > b { font-weight: 600; }
+.steps, .checks { margin: 0; padding-left: 1.3em; display: flex; flex-direction: column; gap: 5px; }
+.checks { list-style: none; padding-left: 0; }
+.checks li { position: relative; padding-left: 1.4em; }
+.checks li::before { content: ""; position: absolute; left: 0; top: 0.3em; width: 0.8em; height: 0.8em; border: 1.5px solid var(--muted); border-radius: 3px; }
+
+/* team guide */
+.guide { display: flex; flex-direction: column; border: 1px solid var(--line); border-radius: 8px; }
+.guide details { padding: 10px 14px; border-bottom: 1px solid var(--line); }
+.guide details:last-child { border-bottom: 0; }
+.guide summary { cursor: pointer; font-weight: 600; font-size: 0.92rem; }
+.guide-list { margin: 8px 0 2px; padding-left: 1.2em; display: flex; flex-direction: column; gap: 5px; font-size: 0.88rem; }
+.guide .table-wrap { margin-top: 8px; }
+.plan.api { min-width: 720px; }
+.plan .mono { font-family: var(--mono); font-size: 0.78rem; white-space: nowrap; }

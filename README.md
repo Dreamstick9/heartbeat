@@ -53,6 +53,9 @@ Commits are counted on the default branch, so they show up once a PR is merged.
 ## Change things
 
 - Start date, repo or names: `config.js`.
-- Tasks: `plan.js`. Each has `day`, `who` (0 to 3), `pts` (1 to 3), `deps` and the text.
+- Tasks: `plan.js`. Each has `day`, `who` (0 to 3), `pts` (1 to 3), a one-line `goal`, numbered `steps`,
+  `done` checks, the `pr` title (or `null` for tasks with nothing to merge) and `deps`.
+  The last step (open the PR, or Mark done) is added automatically.
+- Team rules and the API contract: `GUIDE` at the top of `plan.js`.
 - After changing `app.js`, `config.js`, `plan.js` or `styles.css`, bump the `?v=` number in
   `index.html` and `app.js` so browsers don't keep an old copy.
