@@ -1,0 +1,493 @@
+{
+ "syncedAt": "2026-11-18T17:57:15.437Z",
+ "repo": "Dreamstick9/Kreg_AP_2026",
+ "pulls": [
+  {
+   "number": 29,
+   "title": "KL-19: resolve and list incidents",
+   "url": "https://github.com/Dreamstick9/Kreg_AP_2026/pull/29",
+   "ref": "kl-19-resolve-and-list-incidents",
+   "login": "kabirvashisht4-glitch",
+   "state": "closed",
+   "merged": true,
+   "createdAt": "2026-11-18T16:25:44Z",
+   "mergedAt": "2026-11-18T17:11:46Z"
+  },
+  {
+   "number": 28,
+   "title": "KL-24: manual check and shutdown",
+   "url": "https://github.com/Dreamstick9/Kreg_AP_2026/pull/28",
+   "ref": "kl-24-manual-check-and-shutdown",
+   "login": "madhav-gpt",
+   "state": "closed",
+   "merged": true,
+   "createdAt": "2026-11-18T16:22:07Z",
+   "mergedAt": "2026-11-18T17:45:59Z"
+  },
+  {
+   "number": 27,
+   "title": "KL-22: public status",
+   "url": "https://github.com/Dreamstick9/Kreg_AP_2026/pull/27",
+   "ref": "kl-22-public-status",
+   "login": "dreamstick9",
+   "state": "closed",
+   "merged": true,
+   "createdAt": "2026-11-18T16:20:26Z",
+   "mergedAt": "2026-11-18T16:32:30Z"
+  },
+  {
+   "number": 26,
+   "title": "KL-23: explain before and after index",
+   "url": "https://github.com/Dreamstick9/Kreg_AP_2026/pull/26",
+   "ref": "kl-23-explain-before-and-after-index",
+   "login": "kabirvashisht4-glitch",
+   "state": "closed",
+   "merged": true,
+   "createdAt": "2026-11-18T16:16:21Z",
+   "mergedAt": "2026-11-18T16:18:23Z"
+  },
+  {
+   "number": 25,
+   "title": "KL-25: moving average and ranking",
+   "url": "https://github.com/Dreamstick9/Kreg_AP_2026/pull/25",
+   "ref": "kl-25-moving-average-and-ranking",
+   "login": "boomelio",
+   "state": "closed",
+   "merged": true,
+   "createdAt": "2026-11-18T15:38:24Z",
+   "mergedAt": "2026-11-18T16:18:34Z"
+  },
+  {
+   "number": 23,
+   "title": "CP2 (AP): PostgreSQL schema and ER diagram",
+   "url": "https://github.com/Dreamstick9/Kreg_AP_2026/pull/23",
+   "ref": "kabir-cp2",
+   "login": "kabirvashisht4-glitch",
+   "state": "closed",
+   "merged": false,
+   "createdAt": "2026-11-17T20:56:25Z",
+   "mergedAt": null
+  },
+  {
+   "number": 22,
+   "title": "KL-20: results and daily uptime",
+   "url": "https://github.com/Dreamstick9/Kreg_AP_2026/pull/22",
+   "ref": "kl-20-results-and-daily-uptime",
+   "login": "madhav-gpt",
+   "state": "closed",
+   "merged": true,
+   "createdAt": "2026-11-17T18:21:26Z",
+   "mergedAt": "2026-11-17T20:24:09Z"
+  },
+  {
+   "number": 21,
+   "title": "KL-17: protect routes and postman",
+   "url": "https://github.com/Dreamstick9/Kreg_AP_2026/pull/21",
+   "ref": "kl-17-protect-routes-and-postman",
+   "login": "boomelio",
+   "state": "closed",
+   "merged": true,
+   "createdAt": "2026-11-17T13:19:38Z",
+   "mergedAt": "2026-11-17T20:23:51Z"
+  },
+  {
+   "number": 20,
+   "title": "KL-15: validation and pagination",
+   "url": "https://github.com/Dreamstick9/Kreg_AP_2026/pull/20",
+   "ref": "kl-15-validation-and-pagination",
+   "login": "kabirvashisht4-glitch",
+   "state": "closed",
+   "merged": true,
+   "createdAt": "2026-11-17T12:33:55Z",
+   "mergedAt": "2026-11-17T20:23:42Z"
+  },
+  {
+   "number": 19,
+   "title": "KL-18: incident on 3rd failure",
+   "url": "https://github.com/Dreamstick9/Kreg_AP_2026/pull/19",
+   "ref": "kl-18-incident-on-3rd-failure",
+   "login": "dreamstick9",
+   "state": "closed",
+   "merged": true,
+   "createdAt": "2026-11-17T06:38:42Z",
+   "mergedAt": "2026-11-17T20:24:00Z"
+  },
+  {
+   "number": 18,
+   "title": "KL-14: save checks",
+   "url": "https://github.com/Dreamstick9/Kreg_AP_2026/pull/18",
+   "ref": "kl-14-save-checks",
+   "login": "dreamstick9",
+   "state": "closed",
+   "merged": true,
+   "createdAt": "2026-11-17T04:28:13Z",
+   "mergedAt": "2026-11-17T06:04:57Z"
+  },
+  {
+   "number": 17,
+   "title": "KL-10: login and me",
+   "url": "https://github.com/Dreamstick9/Kreg_AP_2026/pull/17",
+   "ref": "kl-10-login-and-me",
+   "login": "dreamstick9",
+   "state": "closed",
+   "merged": true,
+   "createdAt": "2026-11-17T04:28:08Z",
+   "mergedAt": "2026-11-17T06:02:37Z"
+  },
+  {
+   "number": 16,
+   "title": "KL-13: GET, PATCH and DELETE /api/v1/monitors/:id",
+   "url": "https://github.com/Dreamstick9/Kreg_AP_2026/pull/16",
+   "ref": "main",
+   "login": "boomelio",
+   "state": "closed",
+   "merged": true,
+   "createdAt": "2026-11-16T19:49:46Z",
+   "mergedAt": "2026-11-17T06:03:09Z"
+  },
+  {
+   "number": 15,
+   "title": "KL-13: GET, PATCH and DELETE",
+   "url": "https://github.com/Dreamstick9/Kreg_AP_2026/pull/15",
+   "ref": "patch-1",
+   "login": "boomelio",
+   "state": "closed",
+   "merged": false,
+   "createdAt": "2026-11-16T19:40:19Z",
+   "mergedAt": null
+  },
+  {
+   "number": 14,
+   "title": "KL-15: add monitor validation and pagination",
+   "url": "https://github.com/Dreamstick9/Kreg_AP_2026/pull/14",
+   "ref": "kl-15-validation-and-pagination",
+   "login": "kabirvashisht4-glitch",
+   "state": "closed",
+   "merged": false,
+   "createdAt": "2026-11-16T18:41:34Z",
+   "mergedAt": null
+  },
+  {
+   "number": 13,
+   "title": "KL-16: stats endpoint",
+   "url": "https://github.com/Dreamstick9/Kreg_AP_2026/pull/13",
+   "ref": "kl-16-stats-endpoint",
+   "login": "madhav-gpt",
+   "state": "closed",
+   "merged": true,
+   "createdAt": "2026-11-16T16:16:50Z",
+   "mergedAt": "2026-11-17T06:25:13Z"
+  },
+  {
+   "number": 12,
+   "title": "KL-12: scheduler",
+   "url": "https://github.com/Dreamstick9/Kreg_AP_2026/pull/12",
+   "ref": "kl-12-scheduler",
+   "login": "madhav-gpt",
+   "state": "closed",
+   "merged": true,
+   "createdAt": "2026-11-16T09:20:53Z",
+   "mergedAt": "2026-11-17T06:02:52Z"
+  },
+  {
+   "number": 11,
+   "title": "KL-09: one HTTP check with a timeout",
+   "url": "https://github.com/Dreamstick9/Kreg_AP_2026/pull/11",
+   "ref": "main",
+   "login": "boomelio",
+   "state": "closed",
+   "merged": true,
+   "createdAt": "2026-11-16T04:28:50Z",
+   "mergedAt": "2026-11-16T05:56:56Z"
+  },
+  {
+   "number": 10,
+   "title": "KL-06: seed and db health check",
+   "url": "https://github.com/Dreamstick9/Kreg_AP_2026/pull/10",
+   "ref": "kl-06-seed-and-db-health-check",
+   "login": "dreamstick9",
+   "state": "closed",
+   "merged": true,
+   "createdAt": "2026-11-16T03:50:16Z",
+   "mergedAt": "2026-11-16T05:58:02Z"
+  },
+  {
+   "number": 9,
+   "title": "KL-11: auth middleware and error handling",
+   "url": "https://github.com/Dreamstick9/Kreg_AP_2026/pull/9",
+   "ref": "kl-11-auth-middleware-and-error-handling",
+   "login": "kabirvashisht4-glitch",
+   "state": "closed",
+   "merged": true,
+   "createdAt": "2026-11-15T12:06:26Z",
+   "mergedAt": "2026-11-16T07:21:50Z"
+  },
+  {
+   "number": 8,
+   "title": "KL-07: add register route",
+   "url": "https://github.com/Dreamstick9/Kreg_AP_2026/pull/8",
+   "ref": "kl-07-register-route",
+   "login": "kabirvashisht4-glitch",
+   "state": "closed",
+   "merged": true,
+   "createdAt": "2026-11-14T15:59:24Z",
+   "mergedAt": "2026-11-14T16:05:29Z"
+  },
+  {
+   "number": 7,
+   "title": "KL-02: add Prisma schema and database client",
+   "url": "https://github.com/Dreamstick9/Kreg_AP_2026/pull/7",
+   "ref": "kl-02-prisma-schema",
+   "login": "kabirvashisht4-glitch",
+   "state": "closed",
+   "merged": true,
+   "createdAt": "2026-11-14T11:39:38Z",
+   "mergedAt": "2026-11-14T13:24:20Z"
+  },
+  {
+   "number": 6,
+   "title": "KL-08: create and list monitors",
+   "url": "https://github.com/Dreamstick9/Kreg_AP_2026/pull/6",
+   "ref": "kl-08-create-and-list-monitors",
+   "login": "madhav-gpt",
+   "state": "closed",
+   "merged": true,
+   "createdAt": "2026-11-14T07:45:49Z",
+   "mergedAt": "2026-11-14T18:42:25Z"
+  },
+  {
+   "number": 5,
+   "title": "KL-05: Write SQL queries 1 and 2 in psql",
+   "url": "https://github.com/Dreamstick9/Kreg_AP_2026/pull/5",
+   "ref": "main",
+   "login": "boomelio",
+   "state": "closed",
+   "merged": true,
+   "createdAt": "2026-11-14T07:21:35Z",
+   "mergedAt": "2026-11-14T13:25:25Z"
+  },
+  {
+   "number": 4,
+   "title": "KL-04: fake target",
+   "url": "https://github.com/Dreamstick9/Kreg_AP_2026/pull/4",
+   "ref": "kl-04-fake-target",
+   "login": "madhav-gpt",
+   "state": "closed",
+   "merged": true,
+   "createdAt": "2026-11-13T18:24:11Z",
+   "mergedAt": "2026-11-14T13:24:55Z"
+  },
+  {
+   "number": 3,
+   "title": "KL-03: er diagram and api doc",
+   "url": "https://github.com/Dreamstick9/Kreg_AP_2026/pull/3",
+   "ref": "kl-03-er-diagram-and-api-doc",
+   "login": "madhav-gpt",
+   "state": "closed",
+   "merged": true,
+   "createdAt": "2026-11-13T18:24:00Z",
+   "mergedAt": "2026-11-14T13:24:40Z"
+  },
+  {
+   "number": 2,
+   "title": "KL-01: Express skeleton",
+   "url": "https://github.com/Dreamstick9/Kreg_AP_2026/pull/2",
+   "ref": "kl-01-creating-the-skeleton",
+   "login": "dreamstick9",
+   "state": "closed",
+   "merged": true,
+   "createdAt": "2026-11-13T18:00:18Z",
+   "mergedAt": "2026-11-13T18:01:45Z"
+  }
+ ],
+ "commits": [
+  {
+   "login": "madhav-gpt",
+   "date": "2026-11-18T17:45:58Z"
+  },
+  {
+   "login": "kabirvashisht4-glitch",
+   "date": "2026-11-18T17:11:46Z"
+  },
+  {
+   "login": "dreamstick9",
+   "date": "2026-11-18T16:32:29Z"
+  },
+  {
+   "login": "boomelio",
+   "date": "2026-11-18T16:18:33Z"
+  },
+  {
+   "login": "kabirvashisht4-glitch",
+   "date": "2026-11-18T16:18:23Z"
+  },
+  {
+   "login": "madhav-gpt",
+   "date": "2026-11-17T20:24:09Z"
+  },
+  {
+   "login": "dreamstick9",
+   "date": "2026-11-17T20:23:59Z"
+  },
+  {
+   "login": "boomelio",
+   "date": "2026-11-17T20:23:50Z"
+  },
+  {
+   "login": "kabirvashisht4-glitch",
+   "date": "2026-11-17T20:23:41Z"
+  },
+  {
+   "login": "madhav-gpt",
+   "date": "2026-11-17T06:25:13Z"
+  },
+  {
+   "login": "dreamstick9",
+   "date": "2026-11-17T06:04:56Z"
+  },
+  {
+   "login": "boomelio",
+   "date": "2026-11-17T06:03:09Z"
+  },
+  {
+   "login": "madhav-gpt",
+   "date": "2026-11-17T06:02:51Z"
+  },
+  {
+   "login": "dreamstick9",
+   "date": "2026-11-17T06:02:36Z"
+  },
+  {
+   "login": "dreamstick9",
+   "date": "2026-11-17T05:23:34Z"
+  },
+  {
+   "login": "dreamstick9",
+   "date": "2026-11-16T18:08:15Z"
+  },
+  {
+   "login": "dreamstick9",
+   "date": "2026-11-16T07:21:49Z"
+  },
+  {
+   "login": "kabirvashisht4-glitch",
+   "date": "2026-11-16T06:18:17Z"
+  },
+  {
+   "login": "kabirvashisht4-glitch",
+   "date": "2026-11-16T06:18:08Z"
+  },
+  {
+   "login": "kabirvashisht4-glitch",
+   "date": "2026-11-16T06:18:06Z"
+  },
+  {
+   "login": "kabirvashisht4-glitch",
+   "date": "2026-11-16T06:18:04Z"
+  },
+  {
+   "login": "kabirvashisht4-glitch",
+   "date": "2026-11-16T06:18:02Z"
+  },
+  {
+   "login": "kabirvashisht4-glitch",
+   "date": "2026-11-16T06:17:59Z"
+  },
+  {
+   "login": "dreamstick9",
+   "date": "2026-11-16T05:58:01Z"
+  },
+  {
+   "login": "dreamstick9",
+   "date": "2026-11-16T05:56:55Z"
+  },
+  {
+   "login": "boomelio",
+   "date": "2026-11-16T04:28:13Z"
+  },
+  {
+   "login": "dreamstick9",
+   "date": "2026-11-16T03:49:47Z"
+  },
+  {
+   "login": "kabirvashisht4-glitch",
+   "date": "2026-11-15T12:05:58Z"
+  },
+  {
+   "login": "dreamstick9",
+   "date": "2026-11-14T18:42:25Z"
+  },
+  {
+   "login": "madhav-gpt",
+   "date": "2026-11-14T17:54:35Z"
+  },
+  {
+   "login": "dreamstick9",
+   "date": "2026-11-14T16:05:28Z"
+  },
+  {
+   "login": "kabirvashisht4-glitch",
+   "date": "2026-11-14T15:58:00Z"
+  },
+  {
+   "login": "dreamstick9",
+   "date": "2026-11-14T13:25:25Z"
+  },
+  {
+   "login": "dreamstick9",
+   "date": "2026-11-14T13:24:55Z"
+  },
+  {
+   "login": "dreamstick9",
+   "date": "2026-11-14T13:24:39Z"
+  },
+  {
+   "login": "dreamstick9",
+   "date": "2026-11-14T13:24:19Z"
+  },
+  {
+   "login": "kabirvashisht4-glitch",
+   "date": "2026-11-14T11:47:38Z"
+  },
+  {
+   "login": "kabirvashisht4-glitch",
+   "date": "2026-11-14T11:39:11Z"
+  },
+  {
+   "login": "madhav-gpt",
+   "date": "2026-11-14T07:45:04Z"
+  },
+  {
+   "login": "boomelio",
+   "date": "2026-11-14T07:23:16Z"
+  },
+  {
+   "login": "boomelio",
+   "date": "2026-11-14T07:21:11Z"
+  },
+  {
+   "login": "madhav-gpt",
+   "date": "2026-11-13T18:22:44Z"
+  },
+  {
+   "login": "madhav-gpt",
+   "date": "2026-11-13T18:22:43Z"
+  },
+  {
+   "login": "dreamstick9",
+   "date": "2026-11-13T18:01:44Z"
+  },
+  {
+   "login": "dreamstick9",
+   "date": "2026-11-13T17:53:14Z"
+  },
+  {
+   "login": "dreamstick9",
+   "date": "2026-11-13T13:59:41Z"
+  },
+  {
+   "login": "dreamstick9",
+   "date": "2026-11-13T09:17:22Z"
+  }
+ ]
+}

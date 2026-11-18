@@ -1,8 +1,8 @@
 // Heartbeat: reads the browser's date, shows each person's tasks for the day, and tracks
 // PRs and commits straight from GitHub. Everything it keeps (GitHub data, tasks marked done)
 // lives in this browser's localStorage. Nothing here writes to GitHub.
-import cfg from "./config.js?v=9";
-import PLAN, { GUIDE } from "./plan.js?v=9";
+import cfg from "./config.js?v=10";
+import PLAN, { GUIDE } from "./plan.js?v=10";
 
 (function () {
   "use strict";
@@ -101,6 +101,17 @@ import PLAN, { GUIDE } from "./plan.js?v=9";
     if (demoDay) { gh = { status: "demo", mode: "demo", ...makeDemo(), marks: new Map(), at: now, error: "" }; return render(); }
     const marks = loadMarks();
     if (!repoSet) { gh = { ...gh, status: "unconfigured", marks }; return render(); }
+    // data.json is refreshed every 10 minutes by the sync workflow, so nobody hits GitHub's hourly limit.
+    try {
+      const res = await fetch(`data.json?t=${Date.now()}`, { cache: "no-store" });
+      if (res.ok) {
+        const d = await res.json();
+        if (d.repo === cfg.repo) {
+          gh = { status: "ok", mode: "local", pulls: d.pulls, commits: d.commits, marks, at: new Date(d.syncedAt), error: "" };
+          return render();
+        }
+      }
+    } catch { /* no data.json yet: read GitHub directly below */ }
     const cached = store.get(CACHE_KEY);
     if (!force && cached && Date.now() - cached.at < (cfg.cacheMinutes || 10) * 60000) {
       gh = { status: "ok", mode: "local", pulls: cached.pulls, commits: cached.commits, marks, at: new Date(cached.at), error: "" };
@@ -279,7 +290,7 @@ import PLAN, { GUIDE } from "./plan.js?v=9";
     sync.className = "sync" + (gh.status === "error" ? " err" : "");
     sync.textContent = {
       idle: "", loading: "Syncing…", unconfigured: "Not connected",
-      demo: "Demo data", ok: gh.at ? `Synced ${ago(gh.at, new Date())}` : "Synced",
+      demo: "Demo data", ok: gh.at ? `Data updated ${ago(gh.at, new Date())}` : "Synced",
       error: "Sync failed",
     }[gh.status];
 

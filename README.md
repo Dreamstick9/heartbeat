@@ -30,6 +30,13 @@ Any static host works.
   or import the repo on vercel.com with framework preset **Other** and no build command.
 - **GitHub Pages**: push these files, then Settings → Pages → Deploy from a branch.
 
+## Where the GitHub data comes from
+
+A GitHub Actions workflow (`.github/workflows/sync.yml`) runs `tools/sync.js` every 10 minutes and
+saves the repo's PRs and commits to `data.json`. The page reads that file, so visitors never hit
+GitHub's 60-requests-an-hour limit. To sync right away: repo → Actions → Sync GitHub data →
+Run workflow. If `data.json` is missing, the page falls back to calling GitHub directly.
+
 ## What's stored where
 
 - **PRs and commits** come from GitHub's public API, so everyone sees the same thing. Each browser
