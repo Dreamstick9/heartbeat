@@ -1,17 +1,28 @@
 {
- "syncedAt": "2026-11-19T13:52:57.655Z",
+ "syncedAt": "2026-11-19T18:57:23.446Z",
  "repo": "Dreamstick9/Kreg_AP_2026",
  "pulls": [
+  {
+   "number": 39,
+   "title": "KL-27: downtime and failing queries",
+   "url": "https://github.com/Dreamstick9/Kreg_AP_2026/pull/39",
+   "ref": "kl-27-downtime-and-failing-queries",
+   "login": "kabirvashisht4-glitch",
+   "state": "closed",
+   "merged": true,
+   "createdAt": "2026-11-19T18:26:05Z",
+   "mergedAt": "2026-11-19T18:56:40Z"
+  },
   {
    "number": 38,
    "title": "KL-30: fix bugs from merge day",
    "url": "https://github.com/Dreamstick9/Kreg_AP_2026/pull/38",
    "ref": "kl-30-fix-merge-day-bugs",
    "login": "boomelio",
-   "state": "open",
-   "merged": false,
+   "state": "closed",
+   "merged": true,
    "createdAt": "2026-11-19T12:58:13Z",
-   "mergedAt": null
+   "mergedAt": "2026-11-19T18:57:02Z"
   },
   {
    "number": 37,
@@ -19,10 +30,10 @@
    "url": "https://github.com/Dreamstick9/Kreg_AP_2026/pull/37",
    "ref": "kl-29-readme-setup",
    "login": "boomelio",
-   "state": "open",
-   "merged": false,
+   "state": "closed",
+   "merged": true,
    "createdAt": "2026-11-19T11:05:56Z",
-   "mergedAt": null
+   "mergedAt": "2026-11-19T18:56:51Z"
   },
   {
    "number": 36,
@@ -356,6 +367,18 @@
   }
  ],
  "commits": [
+  {
+   "login": "boomelio",
+   "date": "2026-11-19T18:57:01Z"
+  },
+  {
+   "login": "boomelio",
+   "date": "2026-11-19T18:56:50Z"
+  },
+  {
+   "login": "kabirvashisht4-glitch",
+   "date": "2026-11-19T18:56:39Z"
+  },
   {
    "login": "dreamstick9",
    "date": "2026-11-19T11:02:40Z"
