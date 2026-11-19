@@ -1,7 +1,18 @@
 {
- "syncedAt": "2026-11-18T17:57:15.437Z",
+ "syncedAt": "2026-11-19T00:03:34.911Z",
  "repo": "Dreamstick9/Kreg_AP_2026",
  "pulls": [
+  {
+   "number": 30,
+   "title": "KL-26: react setup and auth pages",
+   "url": "https://github.com/Dreamstick9/Kreg_AP_2026/pull/30",
+   "ref": "kl-26-react-auth",
+   "login": "dreamstick9",
+   "state": "open",
+   "merged": false,
+   "createdAt": "2026-11-18T20:27:13Z",
+   "mergedAt": null
+  },
   {
    "number": 29,
    "title": "KL-19: resolve and list incidents",
