@@ -1,17 +1,61 @@
 {
- "syncedAt": "2026-11-19T00:03:34.911Z",
+ "syncedAt": "2026-11-19T13:52:57.655Z",
  "repo": "Dreamstick9/Kreg_AP_2026",
  "pulls": [
+  {
+   "number": 38,
+   "title": "KL-30: fix bugs from merge day",
+   "url": "https://github.com/Dreamstick9/Kreg_AP_2026/pull/38",
+   "ref": "kl-30-fix-merge-day-bugs",
+   "login": "boomelio",
+   "state": "open",
+   "merged": false,
+   "createdAt": "2026-11-19T12:58:13Z",
+   "mergedAt": null
+  },
+  {
+   "number": 37,
+   "title": "KL-29: readme setup",
+   "url": "https://github.com/Dreamstick9/Kreg_AP_2026/pull/37",
+   "ref": "kl-29-readme-setup",
+   "login": "boomelio",
+   "state": "open",
+   "merged": false,
+   "createdAt": "2026-11-19T11:05:56Z",
+   "mergedAt": null
+  },
+  {
+   "number": 36,
+   "title": "Status page: use the app colors and font",
+   "url": "https://github.com/Dreamstick9/Kreg_AP_2026/pull/36",
+   "ref": "status-page-theme",
+   "login": "dreamstick9",
+   "state": "closed",
+   "merged": true,
+   "createdAt": "2026-11-19T10:56:15Z",
+   "mergedAt": "2026-11-19T11:02:40Z"
+  },
+  {
+   "number": 32,
+   "title": "KL-28: html status page",
+   "url": "https://github.com/Dreamstick9/Kreg_AP_2026/pull/32",
+   "ref": "kl-28-html-status-page",
+   "login": "madhav-gpt",
+   "state": "closed",
+   "merged": true,
+   "createdAt": "2026-11-19T07:51:59Z",
+   "mergedAt": "2026-11-19T10:54:01Z"
+  },
   {
    "number": 30,
    "title": "KL-26: react setup and auth pages",
    "url": "https://github.com/Dreamstick9/Kreg_AP_2026/pull/30",
    "ref": "kl-26-react-auth",
    "login": "dreamstick9",
-   "state": "open",
-   "merged": false,
+   "state": "closed",
+   "merged": true,
    "createdAt": "2026-11-18T20:27:13Z",
-   "mergedAt": null
+   "mergedAt": "2026-11-19T10:53:54Z"
   },
   {
    "number": 29,
@@ -312,6 +356,18 @@
   }
  ],
  "commits": [
+  {
+   "login": "dreamstick9",
+   "date": "2026-11-19T11:02:40Z"
+  },
+  {
+   "login": "madhav-gpt",
+   "date": "2026-11-19T10:54:01Z"
+  },
+  {
+   "login": "dreamstick9",
+   "date": "2026-11-19T10:53:54Z"
+  },
   {
    "login": "madhav-gpt",
    "date": "2026-11-18T17:45:58Z"
