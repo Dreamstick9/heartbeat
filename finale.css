@@ -1,0 +1,127 @@
+/* Finale: the "Evals done" button and what it opens. Uses the tokens from styles.css
+   (--bg, --fg, --muted, --line, --soft, --done, --font), so light and dark follow the page. */
+
+/* ---------- the button block ---------- */
+.fin-block { display: flex; align-items: center; gap: 6px 14px; flex-wrap: wrap; }
+.fin-btn { font-size: 0.9rem; font-weight: 600; padding: 6px 14px; }
+.fin-btn:not(:disabled) { border-color: var(--fg); }
+.fin-when { margin: 0; font-size: 0.85rem; color: var(--muted); font-variant-numeric: tabular-nums; }
+
+/* ---------- the overlay ---------- */
+html.fin-open { overflow: hidden; }
+.fin-overlay {
+  --fin-tint: color-mix(in srgb, var(--done) 9%, transparent);
+  --fin-pad: max(24px, env(safe-area-inset-left), env(safe-area-inset-right));
+  position: fixed; inset: 0; z-index: 1000;
+  display: grid; grid-template-rows: auto minmax(0, 1fr) auto; grid-template-columns: minmax(0, 1fr);
+  background: radial-gradient(120% 70% at 50% -10%, var(--fin-tint), transparent 70%), var(--bg);
+  color: var(--fg); font-family: var(--font); font-size: 1rem; line-height: 1.55;
+  overflow: hidden; outline: none;
+}
+.fin-overlay *, .fin-overlay *::before, .fin-overlay *::after { box-sizing: border-box; }
+.fin-sr { position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0; overflow: hidden; clip-path: inset(50%); white-space: nowrap; border: 0; }
+
+.fin-bar { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: max(16px, env(safe-area-inset-top)) var(--fin-pad) 8px; }
+.fin-progress { position: relative; }
+.fin-dots { display: flex; align-items: center; gap: 6px; }
+.fin-dots i { display: block; width: 8px; height: 8px; border-radius: 4px; background: var(--line); transition: width 0.3s ease, background-color 0.3s ease; }
+.fin-dots i.is-past { background: var(--muted); }
+.fin-dots i.is-on { width: 24px; background: var(--done); }
+.fin-close { font-size: 0.9rem; padding: 8px 14px; min-height: 40px; background: transparent; }
+
+.fin-stage { min-height: 0; overflow-x: hidden; overflow-y: auto; display: flex; flex-direction: column; padding: 16px var(--fin-pad) 24px; }
+.fin-slide { width: 100%; max-width: 860px; margin: auto; display: flex; flex-direction: column; gap: 24px; animation: fin-rise 0.5s cubic-bezier(0.2, 0.7, 0.2, 1) both; }
+@keyframes fin-rise { from { opacity: 0; transform: translateY(14px); } }
+
+.fin-nav { display: flex; justify-content: space-between; gap: 12px; padding: 12px var(--fin-pad) max(20px, env(safe-area-inset-bottom)); }
+.fin-go { font-size: 1rem; font-weight: 600; min-height: 44px; min-width: 96px; padding: 10px 22px; border-radius: 8px; }
+.fin-primary { background: var(--fg); color: var(--bg); border-color: var(--fg); }
+.fin-primary:hover { border-color: var(--fg); opacity: 0.88; }
+.fin-nav .fin-primary { margin-left: auto; }
+.fin-go[hidden] { display: none; }
+
+.fin-confetti { position: fixed; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 2; }
+
+/* ---------- type ---------- */
+.fin-kicker { margin: 0; display: flex; align-items: center; gap: 10px; font-size: 0.95rem; color: var(--muted); }
+.fin-kicker::before { content: ""; flex: none; width: 9px; height: 9px; border-radius: 50%; background: var(--done); animation: fin-beat 1.6s ease-in-out infinite; }
+@keyframes fin-beat { 0%, 60%, 100% { transform: scale(1); } 15% { transform: scale(1.5); } 30% { transform: scale(1); } 42% { transform: scale(1.3); } }
+.fin-h1 { margin: 0; font-size: clamp(2.5rem, 9.4vw, 5.6rem); font-weight: 600; line-height: 1.02; letter-spacing: -0.035em; text-wrap: balance; overflow-wrap: break-word; }
+.fin-h2 { margin: 0; font-size: clamp(1.8rem, 5.4vw, 3rem); font-weight: 600; line-height: 1.08; letter-spacing: -0.025em; text-wrap: balance; }
+.fin-lede { margin: 0; max-width: 34em; font-size: clamp(1.05rem, 2.3vw, 1.35rem); line-height: 1.5; color: var(--muted); text-wrap: pretty; }
+.fin-foot { margin: 0; font-size: 0.88rem; color: var(--muted); }
+.fin-slide-open { gap: 28px; }
+
+/* ---------- 2: numbers ---------- */
+.fin-stats { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 28px 24px; margin-top: 8px; }
+.fin-stat { display: flex; flex-direction: column; gap: 8px; padding-top: 16px; border-top: 2px solid var(--fg); min-width: 0; }
+.fin-num { font-size: clamp(2.8rem, 7vw, 4.6rem); font-weight: 600; line-height: 1; letter-spacing: -0.04em; font-variant-numeric: tabular-nums; white-space: nowrap; }
+.fin-of { font-size: 0.36em; font-weight: 500; letter-spacing: 0; color: var(--muted); }
+.fin-label { font-size: 0.95rem; color: var(--muted); line-height: 1.3; }
+.fin-callout { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 2px 20px; align-items: baseline; padding: 18px 20px; border: 1px solid var(--line); border-radius: 12px; background: var(--soft); }
+.fin-callout-label { grid-row: span 2; align-self: center; font-size: 0.88rem; color: var(--done); font-weight: 600; }
+.fin-callout-main { font-size: clamp(1.2rem, 3vw, 1.6rem); font-weight: 600; letter-spacing: -0.015em; line-height: 1.2; }
+.fin-callout-sub { color: var(--muted); font-size: 0.95rem; }
+
+/* ---------- 3: people ---------- */
+.fin-awards { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+.fin-award { display: grid; grid-template-columns: 48px minmax(0, 1fr); gap: 14px; align-items: start; padding: 18px; border: 1px solid var(--line); border-radius: 12px; background: var(--bg); min-width: 0; }
+.fin-avatar { width: 48px; height: 48px; border-radius: 50%; flex: none; background: var(--soft); color: var(--muted); display: grid; place-items: center; font-size: 1rem; font-weight: 600; overflow: hidden; }
+.fin-avatar img { display: block; width: 100%; height: 100%; object-fit: cover; }
+.fin-award-text { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+.fin-award-name { font-size: 0.95rem; color: var(--muted); overflow-wrap: anywhere; }
+.fin-award-title { font-size: clamp(1.2rem, 2.6vw, 1.45rem); font-weight: 600; line-height: 1.2; letter-spacing: -0.015em; color: var(--done); text-wrap: balance; }
+.fin-award-line { margin-top: 4px; font-size: 0.92rem; line-height: 1.4; overflow-wrap: anywhere; }
+
+/* ---------- 4: standings ---------- */
+.fin-podium { --fin-unit: clamp(110px, 24vh, 210px); list-style: none; margin: 8px 0 0; padding: 0; display: grid; grid-template-columns: repeat(var(--fin-cols, 4), minmax(0, 1fr)); gap: 12px; align-items: end; }
+.fin-place { display: flex; flex-direction: column; align-items: center; gap: 4px; min-width: 0; text-align: center; }
+.fin-place .fin-avatar { margin-bottom: 4px; }
+.fin-place-name { max-width: 100%; font-weight: 600; font-size: 1rem; line-height: 1.2; overflow-wrap: anywhere; }
+.fin-place-score { font-size: clamp(1.5rem, 5.6vw, 2.6rem); font-weight: 600; line-height: 1.1; letter-spacing: -0.03em; font-variant-numeric: tabular-nums; }
+.fin-step { width: 100%; margin-top: 8px; height: calc(var(--fin-unit) * var(--fin-level, 0.4)); border: 1px solid var(--line); border-bottom: 0; border-radius: 10px 10px 0 0; background: var(--soft); color: var(--muted); display: flex; justify-content: center; padding-top: 10px; font-weight: 600; font-size: 1.1rem; overflow: hidden; animation: fin-grow 0.9s cubic-bezier(0.2, 0.8, 0.2, 1) both; }
+@keyframes fin-grow { from { height: 0; } }
+.fin-place-1 .fin-step { --fin-level: 1; background: var(--done); border-color: var(--done); color: var(--bg); animation-delay: 0.3s; }
+.fin-place-1 .fin-place-score { color: var(--done); }
+.fin-place-2 .fin-step { --fin-level: 0.74; animation-delay: 0.2s; }
+.fin-place-3 .fin-step { --fin-level: 0.54; animation-delay: 0.1s; }
+.fin-place-4 .fin-step { --fin-level: 0.38; }
+.fin-podium + .fin-foot { padding-top: 14px; border-top: 1px solid var(--line); margin-top: -24px; }
+
+/* ---------- 5: note ---------- */
+.fin-slide-note { max-width: 640px; }
+.fin-note { display: flex; flex-direction: column; gap: 1em; font-size: clamp(1.06rem, 2.1vw, 1.22rem); line-height: 1.62; }
+.fin-note p { margin: 0; text-wrap: pretty; }
+.fin-note-to { margin: 0; font-size: 1em; font-weight: 600; line-height: inherit; }
+.fin-note-sign { font-weight: 600; padding-top: 0.2em; }
+.fin-note-sign::before { content: ""; display: block; width: 28px; height: 2px; background: var(--done); margin-bottom: 0.9em; }
+
+/* ---------- 6: close ---------- */
+.fin-actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 4px; }
+
+/* ---------- small screens ---------- */
+@media (max-width: 700px) {
+  .fin-overlay { --fin-pad: max(20px, env(safe-area-inset-left), env(safe-area-inset-right)); }
+  .fin-slide { gap: 18px; }
+  .fin-stats { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 22px 20px; margin-top: 0; }
+  .fin-stat { padding-top: 12px; }
+  .fin-callout { grid-template-columns: minmax(0, 1fr); padding: 14px 16px; }
+  .fin-callout-label { grid-row: auto; }
+  .fin-awards { grid-template-columns: minmax(0, 1fr); gap: 10px; }
+  .fin-award { grid-template-columns: 40px minmax(0, 1fr); gap: 12px; padding: 14px; }
+  .fin-award .fin-avatar { width: 40px; height: 40px; }
+  .fin-podium { gap: 6px; }
+  .fin-place .fin-avatar { width: 40px; height: 40px; }
+  .fin-place-name { font-size: 0.82rem; }
+  .fin-podium + .fin-foot { margin-top: -18px; }
+}
+@media (max-height: 620px) {
+  .fin-podium { --fin-unit: 96px; }
+  .fin-slide { gap: 14px; }
+}
+
+/* ---------- no motion ---------- */
+@media (prefers-reduced-motion: reduce) {
+  .fin-slide, .fin-step, .fin-kicker::before { animation: none; }
+  .fin-dots i { transition: none; }
+}

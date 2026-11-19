@@ -1,13 +1,15 @@
 // Heartbeat: reads the browser's date, shows each person's tasks for the day, and tracks
 // PRs and commits straight from GitHub. Everything it keeps (GitHub data, tasks marked done)
 // lives in this browser's localStorage. Nothing here writes to GitHub.
-import cfg from "./config.js?v=10";
-import PLAN, { GUIDE } from "./plan.js?v=10";
+import cfg from "./config.js?v=11";
+import PLAN, { GUIDE } from "./plan.js?v=11";
+import { mountUpdate } from "./update.js?v=11";
+import { mountFinale } from "./finale.js?v=11";
 
 (function () {
   "use strict";
 
-  const DAYS = 10;
+  const DAYS = 9; // 8 working days, then the eval day
   const LETTERS = ["A", "B", "C", "D"];
   const DAY_MS = 86400000;
   const params = new URLSearchParams(location.search);
@@ -37,6 +39,10 @@ import PLAN, { GUIDE } from "./plan.js?v=10";
   const START = parseYmd(cfg.startDate);
   const dateOfDay = (n) => new Date(START.getTime() + (n - 1) * DAY_MS);
   const dayOf = (d) => Math.round((midnight(d) - START) / DAY_MS) + 1;
+  // The eval day has no tasks. It is the last day of the plan unless config.js says otherwise.
+  const EVAL_DAY = /^\d{4}-\d{2}-\d{2}$/.test(cfg.evalDate || "") ? dayOf(parseYmd(cfg.evalDate)) : DAYS;
+  const dayName = (n) => (n === EVAL_DAY ? "Evals" : `Day ${n}`);
+  const noTasks = (n) => (n === EVAL_DAY ? "Evaluation day. No tasks." : "No tasks on this day.");
   const fmtLong = new Intl.DateTimeFormat(undefined, { weekday: "long", day: "numeric", month: "long", year: "numeric" });
   const fmtShort = new Intl.DateTimeFormat(undefined, { weekday: "short", day: "numeric", month: "short" });
   const fmtDay = new Intl.DateTimeFormat(undefined, { day: "numeric", month: "short" });
@@ -107,7 +113,11 @@ import PLAN, { GUIDE } from "./plan.js?v=10";
       if (res.ok) {
         const d = await res.json();
         if (d.repo === cfg.repo) {
-          gh = { status: "ok", mode: "local", pulls: d.pulls, commits: d.commits, marks, at: new Date(d.syncedAt), error: "" };
+          // "Update now" saves what it fetched; keep that if it is newer than the synced file.
+          const live = store.get(CACHE_KEY);
+          const newer = live && live.at > Date.parse(d.syncedAt) ? live : null;
+          gh = { status: "ok", mode: "local", pulls: (newer || d).pulls, commits: (newer || d).commits, marks,
+            at: new Date(newer ? newer.at : d.syncedAt), error: "" };
           return render();
         }
       }
@@ -280,8 +290,18 @@ import PLAN, { GUIDE } from "./plan.js?v=10";
   const memberName = (m) => m.name || `Teammate ${m.letter}`;
 
   // ---------- render ----------
+  // The "Evals done" button. It always uses the real clock, so ?demo can't unlock it early,
+  // and it is only rebuilt when the data behind it changes.
+  let finaleFor = null;
+  function renderFinale() {
+    if (demoDay || !repoSet || (finaleFor && finaleFor.pulls === gh.pulls && finaleFor.marks === gh.marks)) return;
+    finaleFor = { pulls: gh.pulls, marks: gh.marks };
+    mountFinale($("finale"), { cfg, plan: PLAN, pulls: gh.pulls, commits: gh.commits, marks: gh.marks });
+  }
+
   function render() {
     const { status, stats } = derive();
+    renderFinale();
 
     // header
     $("today-date").textContent = fmtLong.format(now);
@@ -317,19 +337,24 @@ import PLAN, { GUIDE } from "./plan.js?v=10";
       const ts = PLAN.filter((t) => t.day === d);
       const dn = ts.filter((t) => status.get(t.id)?.s === "done").length;
       days.append(el("button", {
-        class: "day" + (d === todayN ? " is-today" : "") + (d === selDay ? " is-sel" : ""), type: "button", role: "tab",
-        "aria-selected": String(d === selDay), "aria-label": `Day ${d}, ${fmtShort.format(dateOfDay(d))}, ${dn} of ${ts.length} done`,
+        class: "day" + (d === todayN ? " is-today" : "") + (d === selDay ? " is-sel" : "") + (d === EVAL_DAY ? " is-eval" : ""), type: "button", role: "tab",
+        // The strip's grid in styles.css has 10 columns (5 on phones); the eval day takes two, so 9 days fill it.
+        style: d === EVAL_DAY && DAYS === 9 ? "grid-column: span 2" : null,
+        "aria-selected": String(d === selDay), "aria-label": `${dayName(d)}, ${fmtShort.format(dateOfDay(d))}, ${ts.length ? `${dn} of ${ts.length} done` : "no tasks"}`,
         onclick: () => { selDay = d; render(); },
-      }, el("b", { text: `Day ${d}` }), el("span", { text: fmtDay.format(dateOfDay(d)) }), el("div", { class: "mini" }, el("i", { style: `width:${ts.length ? (dn / ts.length) * 100 : 0}%` }))));
+      }, el("b", { text: dayName(d) }), el("span", { text: fmtDay.format(dateOfDay(d)) }), el("div", { class: "mini" }, el("i", { style: `width:${ts.length ? (dn / ts.length) * 100 : 0}%` }))));
     }
 
     // member cards
-    $("work-h").textContent = selDay === todayN ? `Today · day ${selDay}` : `Day ${selDay} · ${fmtShort.format(dateOfDay(selDay))}`;
+    $("work-h").textContent = selDay === todayN ? `Today · ${dayName(selDay).toLowerCase()}` : `${dayName(selDay)} · ${fmtShort.format(dateOfDay(selDay))}`;
     $("to-today").disabled = selDay === clampDay(todayN);
     $("prev-day").disabled = selDay <= 1;
     $("next-day").disabled = selDay >= DAYS;
     const members = $("members"); members.replaceChildren();
-    for (const m of team) {
+    // A day with no tasks at all (the eval day) gets one line, not four empty cards.
+    const anyToday = PLAN.some((t) => t.day === selDay);
+    if (!anyToday) members.append(el("p", { class: "empty", style: "grid-column: 1 / -1", text: noTasks(selDay) }));
+    for (const m of anyToday ? team : []) {
       const ts = PLAN.filter((t) => t.day === selDay && t.who === m.i);
       const pts = ts.reduce((a, t) => a + t.pts, 0);
       const card = el("article", { class: "member", "aria-label": memberName(m) },
@@ -404,8 +429,9 @@ import PLAN, { GUIDE } from "./plan.js?v=10";
     const tb = el("tbody");
     for (let d = 1; d <= DAYS; d++) {
       tb.append(el("tr", { class: d === todayN ? "is-today" : "" },
-        el("td", { class: "dcell" }, `Day ${d}`, el("br"), fmtShort.format(dateOfDay(d))),
-        team.map((m) => el("td", {}, PLAN.filter((t) => t.day === d && t.who === m.i).map((t) => {
+        el("td", { class: "dcell" }, dayName(d), el("br"), fmtShort.format(dateOfDay(d))),
+        !PLAN.some((t) => t.day === d) ? el("td", { class: "muted", colspan: team.length, text: noTasks(d) })
+        : team.map((m) => el("td", {}, PLAN.filter((t) => t.day === d && t.who === m.i).map((t) => {
           const s = status.get(t.id);
           return el("span", { class: "t " + (s ? s.s : "") }, el("i", { text: t.id }), `${t.title} (${t.pts})`);
         })))));
@@ -432,7 +458,16 @@ import PLAN, { GUIDE } from "./plan.js?v=10";
   $("prev-day").addEventListener("click", () => { selDay = clampDay(selDay - 1); render(); });
   $("next-day").addEventListener("click", () => { selDay = clampDay(selDay + 1); render(); });
   $("to-today").addEventListener("click", () => { selDay = clampDay(todayN); render(); });
-  $("refresh").addEventListener("click", () => loadData(true));
+  // "Update now" reads GitHub directly for this browser, so nobody waits for the next 10-minute sync.
+  if (demoDay || !repoSet) $("refresh").hidden = true;
+  else mountUpdate($("refresh"), $("update-status"), {
+    cfg,
+    onData(d) {
+      store.set(CACHE_KEY, { at: d.at.getTime(), pulls: d.pulls, commits: d.commits });
+      gh = { status: "ok", mode: "local", pulls: d.pulls, commits: d.commits, marks: loadMarks(), at: d.at, error: "" };
+      render();
+    },
+  });
 
   // keep several open tabs in step when one of them marks a task
   window.addEventListener("storage", (e) => { if (e.key === MARKS_KEY) { gh.marks = loadMarks(); render(); } });

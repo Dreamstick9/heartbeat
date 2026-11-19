@@ -41,7 +41,7 @@ section { display: flex; flex-direction: column; gap: 12px; min-width: 0; }
 @media (max-width: 800px) { .split { grid-template-columns: 1fr; } }
 
 /* banner */
-#banner:empty { display: none; }
+#banner:empty, #update-status:empty { display: none; }
 .banner { border: 1px solid var(--line); background: var(--soft); border-radius: 8px; padding: 12px 14px; display: flex; flex-direction: column; gap: 4px; font-size: 0.9rem; }
 
 /* days */

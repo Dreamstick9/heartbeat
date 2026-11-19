@@ -3,8 +3,14 @@ export default {
   // The team's Kreg Lite repository on GitHub, as "owner/name".
   repo: "Dreamstick9/Kreg_AP_2026",
 
-  // Day 1 of the 10-day plan (YYYY-MM-DD, your local date).
+  // Day 1 of the plan (YYYY-MM-DD, your local date). Work runs for 8 days, to Friday 20 Nov.
   startDate: "2026-11-13",
+
+  // The evaluation day (YYYY-MM-DD, your local date). It is day 9 of the plan and has no tasks.
+  evalDate: "2026-11-21",
+
+  // When the evals are over on that day (HH:MM, 24-hour, your local time).
+  evalDoneAfter: "14:30",
 
   // The four of you, in plan order: member 0 gets the "A" tasks in plan.js, member 1 "B", and so on.
   // `github` is the login only (no @). `name` is what the page shows.

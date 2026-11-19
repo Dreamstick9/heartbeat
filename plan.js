@@ -1,9 +1,13 @@
-// The 10-day Kreg Lite plan.
+// The Kreg Lite plan: 8 working days (day 1 = Fri 13 Nov 2026, day 8 = Fri 20 Nov),
+// then day 9 (Sat 21 Nov) is the eval day and has no tasks. There is no day 10.
 //
 // Each task:
 //   id, day, who      who = 0-3, the index into config.team
 //   pts               effort: 1 = under an hour, 2 = one to two hours, 3 = two to three hours.
-//                     Nobody gets more than 3 points on a day; everyone ends on 20.
+//                     Days 1 to 7: nobody gets more than 3 points on a day.
+//                     Day 8 (Friday) breaks that rule on purpose: the evals moved to Saturday,
+//                     so the old day 9 (freeze) and day 10 (rehearsal) tasks are all due Friday,
+//                     which makes 4 to 6 points each that day. Everyone still ends on 20.
 //   title, goal       what it is, and what it achieves, in one line each
 //   steps             exactly what to do, in order. Text in `backticks` shows as code.
 //   done              checks that are all true when the task is finished
@@ -636,7 +640,8 @@ const PLAN = [
     concepts: "Reading other people's code, small focused PRs, closing issues from PRs",
     lectures: [L.apMvc], deps: ["KL-21"] },
 
-  // ---------------- Day 8 ----------------
+  // ---------------- Day 8 (Friday): last build tasks ----------------
+  // Friday carries three tasks each, in this order: build, then Freeze, then Rehearse.
   { id: "KL-31", day: 8, who: 0, pts: 2, title: "React: monitor detail page",
     goal: "One page that shows everything about one monitor.",
     steps: [
@@ -705,11 +710,11 @@ const PLAN = [
     concepts: "Public routes in React, polling, conditional styling",
     lectures: [L.apRouter], deps: ["KL-26", "KL-22"] },
 
-  // ---------------- Day 9: feature freeze ----------------
-  { id: "KL-35", day: 9, who: 0, pts: 1, title: "Freeze: run the demo flow once, write the auth notes",
+  // ---------------- Day 8 (Friday), continued: feature freeze ----------------
+  { id: "KL-35", day: 8, who: 0, pts: 1, title: "Freeze: run the demo flow once, write the auth notes",
     goal: "Confirm everything works on a fresh database, and be ready to explain auth.",
     steps: [
-      "From today only bug fixes get merged. No new features.",
+      "Start once today's four build PRs (KL-31, KL-32, KL-33, KL-34) are merged. From then on only bug fixes get merged. No new features: evals are on Saturday.",
       "`git checkout main`, `git pull upstream main`, `npm install`, `npx prisma migrate reset` (re-seeds), then start the fake target, the API and the client.",
       "Run the Postman flow from KL-21 once, then the same flow in the React app. Post anything that breaks in the group chat.",
       "Write `docs/viva-auth.md`, at most one page, answering: How does register store the password? What's inside the JWT, and how long does it last? What does the auth middleware do, step by step? Why do other users' monitors return 404 and not 403?",
@@ -722,7 +727,7 @@ const PLAN = [
     concepts: "Explaining your own code out loud",
     lectures: [L.apJwt, L.apAuth], deps: [] },
 
-  { id: "KL-37", day: 9, who: 1, pts: 2, title: "Freeze: final ER diagram and database notes",
+  { id: "KL-37", day: 8, who: 1, pts: 2, title: "Freeze: final ER diagram and database notes",
     goal: "Be ready to explain the database design in the viva.",
     steps: [
       "Compare `docs/er-diagram.png` with `prisma/schema.prisma` and redraw the diagram if anything changed.",
@@ -736,7 +741,7 @@ const PLAN = [
     concepts: "Normalization, indexes, ACID in your own words",
     lectures: [L.deNorm, L.deIdx, L.deTx], deps: [] },
 
-  { id: "KL-38", day: 9, who: 2, pts: 2, title: "Freeze: demo script and checker notes",
+  { id: "KL-38", day: 8, who: 2, pts: 2, title: "Freeze: demo script and checker notes",
     goal: "A demo anyone on the team can run from a script, and notes on the checker.",
     steps: [
       "Write `docs/demo.md`: the 5-minute demo step by step, in order: which commands to run, which pages to open, when to toggle the fake target, what the audience should see, and who presents each part (the auth, database, checker, and SQL plus status page owners).",
@@ -750,7 +755,7 @@ const PLAN = [
     concepts: "The event loop, events, explaining design choices",
     lectures: [L.apLoop, L.apEvents], deps: [] },
 
-  { id: "KL-39", day: 9, who: 3, pts: 2, title: "Freeze: SQL notes",
+  { id: "KL-39", day: 8, who: 3, pts: 2, title: "Freeze: SQL notes",
     goal: "Be ready to explain every query in the viva.",
     steps: [
       "Write `docs/viva-sql.md` with one entry for each of the 6 queries in `docs/queries.sql` and the 100k insert from KL-23: one line on what it answers, and one line naming the SQL feature it shows (LEFT JOIN, GROUP BY, window function, CTE, HAVING, correlated subquery, generate_series).",
@@ -763,9 +768,9 @@ const PLAN = [
     concepts: "Joins, GROUP BY, window functions, CTEs, subqueries",
     lectures: [L.deWin, L.deCte, L.deSub], deps: [] },
 
-  // ---------------- Day 10: rehearsal ----------------
-  { id: "KL-40", day: 10, who: 0, pts: 1, title: "Rehearse: setup and auth",
-    goal: "Present your part confidently, twice.",
+  // ---------------- Day 8 (Friday), continued: rehearsal, the day before evals ----------------
+  { id: "KL-40", day: 8, who: 0, pts: 1, title: "Rehearse: setup and auth",
+    goal: "Friday, the day before evals: present your part confidently, twice.",
     steps: [
       "Clone the repo into a new folder and follow only the README until the app runs. Time it.",
       "Present your part twice: register and log in in the React app, then explain the JWT and the middleware using `docs/viva-auth.md`.",
@@ -776,29 +781,31 @@ const PLAN = [
     ],
     pr: null, concepts: "Your own tasks", lectures: [], deps: [] },
 
-  { id: "KL-41", day: 10, who: 1, pts: 1, title: "Rehearse: the database",
-    goal: "Present your part confidently, twice.",
+  { id: "KL-41", day: 8, who: 1, pts: 1, title: "Rehearse: the database",
+    goal: "Friday, the day before evals: present your part confidently, twice.",
     steps: [
       "Present twice: the ER diagram, the schema, and the EXPLAIN before and after screenshots, explaining normalization and the indexes using `docs/viva-db.md`.",
     ],
     done: ["Your part takes under 2 minutes without reading notes."],
     pr: null, concepts: "Your own tasks", lectures: [], deps: [] },
 
-  { id: "KL-42", day: 10, who: 2, pts: 1, title: "Rehearse: the checker",
-    goal: "Present your part confidently, twice.",
+  { id: "KL-42", day: 8, who: 2, pts: 1, title: "Rehearse: the checker",
+    goal: "Friday, the day before evals: present your part confidently, twice.",
     steps: [
       "Run the live toggle demo twice from `docs/demo.md`: the monitor goes DOWN, an incident opens, then it resolves. Explain each step using `docs/viva-checker.md`.",
     ],
     done: ["Your part takes under 2 minutes without reading notes, and the live demo works both times."],
     pr: null, concepts: "Your own tasks", lectures: [], deps: [] },
 
-  { id: "KL-43", day: 10, who: 3, pts: 1, title: "Rehearse: SQL and the status page",
-    goal: "Present your part confidently, twice.",
+  { id: "KL-43", day: 8, who: 3, pts: 1, title: "Rehearse: SQL and the status page",
+    goal: "Friday, the day before evals: present your part confidently, twice.",
     steps: [
       "Present twice: open `/api/v1/stats/overview` and the status page, and explain two queries from `docs/viva-sql.md` (one window function, one correlated subquery).",
     ],
     done: ["Your part takes under 2 minutes without reading notes."],
     pr: null, concepts: "Your own tasks", lectures: [], deps: [] },
+
+  // ---------------- Day 9 (Saturday): eval day, no tasks ----------------
 ];
 
 export default PLAN;
