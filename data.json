@@ -1,17 +1,72 @@
 {
- "syncedAt": "2026-11-20T19:02:40.691Z",
+ "syncedAt": "2026-11-20T20:41:51.412Z",
  "repo": "Dreamstick9/Kreg_AP_2026",
  "pulls": [
+  {
+   "number": 46,
+   "title": "KL-35: auth viva notes",
+   "url": "https://github.com/Dreamstick9/Kreg_AP_2026/pull/46",
+   "ref": "kl-35-auth-notes",
+   "login": "dreamstick9",
+   "state": "closed",
+   "merged": true,
+   "createdAt": "2026-11-20T20:39:50Z",
+   "mergedAt": "2026-11-20T20:41:02Z"
+  },
+  {
+   "number": 45,
+   "title": "KL-31: monitor detail page",
+   "url": "https://github.com/Dreamstick9/Kreg_AP_2026/pull/45",
+   "ref": "kl-31-monitor-detail",
+   "login": "dreamstick9",
+   "state": "closed",
+   "merged": true,
+   "createdAt": "2026-11-20T20:39:45Z",
+   "mergedAt": "2026-11-20T20:40:28Z"
+  },
+  {
+   "number": 44,
+   "title": "KL-37: db viva notes",
+   "url": "https://github.com/Dreamstick9/Kreg_AP_2026/pull/44",
+   "ref": "kl-37-db-viva-notes",
+   "login": "boomelio",
+   "state": "open",
+   "merged": false,
+   "createdAt": "2026-11-20T20:34:28Z",
+   "mergedAt": null
+  },
+  {
+   "number": 43,
+   "title": "KL-37: db viva notes",
+   "url": "https://github.com/Dreamstick9/Kreg_AP_2026/pull/43",
+   "ref": "kl-37-db-viva-notes",
+   "login": "kabirvashisht4-glitch",
+   "state": "closed",
+   "merged": true,
+   "createdAt": "2026-11-20T19:25:08Z",
+   "mergedAt": "2026-11-20T20:41:12Z"
+  },
+  {
+   "number": 42,
+   "title": "KL-33: full postman collection",
+   "url": "https://github.com/Dreamstick9/Kreg_AP_2026/pull/42",
+   "ref": "kl-33-full-postman-collection",
+   "login": "kabirvashisht4-glitch",
+   "state": "closed",
+   "merged": true,
+   "createdAt": "2026-11-20T19:17:07Z",
+   "mergedAt": "2026-11-20T20:40:51Z"
+  },
   {
    "number": 41,
    "title": "KL-38: demo script and checker notes",
    "url": "https://github.com/Dreamstick9/Kreg_AP_2026/pull/41",
    "ref": "kl-38-demo-and-checker-notes",
    "login": "madhav-gpt",
-   "state": "open",
-   "merged": false,
+   "state": "closed",
+   "merged": true,
    "createdAt": "2026-11-20T13:48:10Z",
-   "mergedAt": null
+   "mergedAt": "2026-11-20T20:41:23Z"
   },
   {
    "number": 40,
@@ -19,10 +74,10 @@
    "url": "https://github.com/Dreamstick9/Kreg_AP_2026/pull/40",
    "ref": "kl-32-dashboard",
    "login": "madhav-gpt",
-   "state": "open",
-   "merged": false,
+   "state": "closed",
+   "merged": true,
    "createdAt": "2026-11-20T12:56:16Z",
-   "mergedAt": null
+   "mergedAt": "2026-11-20T20:40:40Z"
   },
   {
    "number": 39,
@@ -389,6 +444,30 @@
   }
  ],
  "commits": [
+  {
+   "login": "madhav-gpt",
+   "date": "2026-11-20T20:41:23Z"
+  },
+  {
+   "login": "kabirvashisht4-glitch",
+   "date": "2026-11-20T20:41:12Z"
+  },
+  {
+   "login": "dreamstick9",
+   "date": "2026-11-20T20:41:01Z"
+  },
+  {
+   "login": "kabirvashisht4-glitch",
+   "date": "2026-11-20T20:40:50Z"
+  },
+  {
+   "login": "madhav-gpt",
+   "date": "2026-11-20T20:40:39Z"
+  },
+  {
+   "login": "dreamstick9",
+   "date": "2026-11-20T20:40:28Z"
+  },
   {
    "login": "boomelio",
    "date": "2026-11-19T18:57:01Z"
