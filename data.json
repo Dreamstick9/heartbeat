@@ -1,7 +1,29 @@
 {
- "syncedAt": "2026-11-20T20:41:51.412Z",
+ "syncedAt": "2026-11-20T21:04:03.844Z",
  "repo": "Dreamstick9/Kreg_AP_2026",
  "pulls": [
+  {
+   "number": 48,
+   "title": "KL-39: sql viva notes",
+   "url": "https://github.com/Dreamstick9/Kreg_AP_2026/pull/48",
+   "ref": "kl-39-sql-viva-notes",
+   "login": "boomelio",
+   "state": "open",
+   "merged": false,
+   "createdAt": "2026-11-20T21:03:07Z",
+   "mergedAt": null
+  },
+  {
+   "number": 47,
+   "title": "KL-34: react status page",
+   "url": "https://github.com/Dreamstick9/Kreg_AP_2026/pull/47",
+   "ref": "kl-34-react-status-page",
+   "login": "boomelio",
+   "state": "closed",
+   "merged": true,
+   "createdAt": "2026-11-20T20:56:10Z",
+   "mergedAt": "2026-11-20T21:03:51Z"
+  },
   {
    "number": 46,
    "title": "KL-35: auth viva notes",
@@ -30,7 +52,7 @@
    "url": "https://github.com/Dreamstick9/Kreg_AP_2026/pull/44",
    "ref": "kl-37-db-viva-notes",
    "login": "boomelio",
-   "state": "open",
+   "state": "closed",
    "merged": false,
    "createdAt": "2026-11-20T20:34:28Z",
    "mergedAt": null
@@ -444,6 +466,10 @@
   }
  ],
  "commits": [
+  {
+   "login": "boomelio",
+   "date": "2026-11-20T21:03:50Z"
+  },
   {
    "login": "madhav-gpt",
    "date": "2026-11-20T20:41:23Z"
