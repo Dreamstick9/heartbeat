@@ -1,7 +1,29 @@
 {
- "syncedAt": "2026-11-19T18:57:23.446Z",
+ "syncedAt": "2026-11-20T19:02:40.691Z",
  "repo": "Dreamstick9/Kreg_AP_2026",
  "pulls": [
+  {
+   "number": 41,
+   "title": "KL-38: demo script and checker notes",
+   "url": "https://github.com/Dreamstick9/Kreg_AP_2026/pull/41",
+   "ref": "kl-38-demo-and-checker-notes",
+   "login": "madhav-gpt",
+   "state": "open",
+   "merged": false,
+   "createdAt": "2026-11-20T13:48:10Z",
+   "mergedAt": null
+  },
+  {
+   "number": 40,
+   "title": "KL-32: dashboard",
+   "url": "https://github.com/Dreamstick9/Kreg_AP_2026/pull/40",
+   "ref": "kl-32-dashboard",
+   "login": "madhav-gpt",
+   "state": "open",
+   "merged": false,
+   "createdAt": "2026-11-20T12:56:16Z",
+   "mergedAt": null
+  },
   {
    "number": 39,
    "title": "KL-27: downtime and failing queries",
