@@ -10,7 +10,7 @@ export default {
   evalDate: "2026-11-21",
 
   // When the evals are over on that day (HH:MM, 24-hour, your local time).
-  evalDoneAfter: "14:30",
+  evalDoneAfter: "12:00",
 
   // The four of you, in plan order: member 0 gets the "A" tasks in plan.js, member 1 "B", and so on.
   // `github` is the login only (no @). `name` is what the page shows.

@@ -1,10 +1,10 @@
 // Heartbeat: reads the browser's date, shows each person's tasks for the day, and tracks
 // PRs and commits straight from GitHub. Everything it keeps (GitHub data, tasks marked done)
 // lives in this browser's localStorage. Nothing here writes to GitHub.
-import cfg from "./config.js?v=11";
-import PLAN, { GUIDE } from "./plan.js?v=11";
-import { mountUpdate } from "./update.js?v=11";
-import { mountFinale } from "./finale.js?v=11";
+import cfg from "./config.js?v=12";
+import PLAN, { GUIDE } from "./plan.js?v=12";
+import { mountUpdate } from "./update.js?v=12";
+import { mountFinale } from "./finale.js?v=12";
 
 (function () {
   "use strict";

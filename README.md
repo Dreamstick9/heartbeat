@@ -78,7 +78,7 @@ Commits are counted on the default branch, so they show up once a PR is merged.
 
 - Start date, repo or names: `config.js`.
 - The eval day: `evalDate` in `config.js` (a local date, `"2026-11-21"`). That day is labelled
-  Evals in the day strip and shows "Evaluation day. No tasks." `evalDoneAfter` (`"14:30"`) is the
+  Evals in the day strip and shows "Evaluation day. No tasks." `evalDoneAfter` (`"12:00"`) is the
   local time on that day when the evals are over.
 - Reset the leaderboard: set `countFrom` in `config.js` to the current UTC time. Activity before it is ignored.
 - Tasks: `plan.js`. Each has `day` (1 to 8), `who` (0 to 3), `pts` (1 to 3), a one-line `goal`, numbered `steps`,
