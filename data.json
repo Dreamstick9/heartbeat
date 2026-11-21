@@ -1,7 +1,29 @@
 {
- "syncedAt": "2026-11-20T21:07:24.748Z",
+ "syncedAt": "2026-11-21T00:45:48.721Z",
  "repo": "Dreamstick9/Kreg_AP_2026",
  "pulls": [
+  {
+   "number": 50,
+   "title": "fix: clearer error for unregistered login",
+   "url": "https://github.com/Dreamstick9/Kreg_AP_2026/pull/50",
+   "ref": "fix/unregistered-login-error",
+   "login": "kaashviw3spaces",
+   "state": "open",
+   "merged": false,
+   "createdAt": "2026-11-20T22:34:04Z",
+   "mergedAt": null
+  },
+  {
+   "number": 49,
+   "title": "fix: show clear error for unregistered login email",
+   "url": "https://github.com/Dreamstick9/Kreg_AP_2026/pull/49",
+   "ref": "fix/issue-31-login-error",
+   "login": "prachivats-21",
+   "state": "open",
+   "merged": false,
+   "createdAt": "2026-11-20T22:15:40Z",
+   "mergedAt": null
+  },
   {
    "number": 48,
    "title": "KL-39: sql viva notes",
