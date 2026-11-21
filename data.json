@@ -1,7 +1,18 @@
 {
- "syncedAt": "2026-11-21T00:45:48.721Z",
+ "syncedAt": "2026-11-21T07:45:46.621Z",
  "repo": "Dreamstick9/Kreg_AP_2026",
  "pulls": [
+  {
+   "number": 51,
+   "title": "edit, pause and delete on the monitor page",
+   "url": "https://github.com/Dreamstick9/Kreg_AP_2026/pull/51",
+   "ref": "feat/edit-delete-monitor",
+   "login": "dreamstick9",
+   "state": "closed",
+   "merged": true,
+   "createdAt": "2026-11-21T03:48:42Z",
+   "mergedAt": "2026-11-21T04:16:35Z"
+  },
   {
    "number": 50,
    "title": "fix: clearer error for unregistered login",
@@ -488,6 +499,10 @@
   }
  ],
  "commits": [
+  {
+   "login": "dreamstick9",
+   "date": "2026-11-21T04:16:35Z"
+  },
   {
    "login": "boomelio",
    "date": "2026-11-20T21:07:12Z"
